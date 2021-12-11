@@ -54,7 +54,7 @@ def find_best_spread(data_matrix, binary_data, spread_val):
 
 
 def l2_norm(a, b):
-    return np.sum((a - b) ** 2)
+    return math.sqrt(np.sum((a - b) ** 2))
 
 
 if __name__ == '__main__':
