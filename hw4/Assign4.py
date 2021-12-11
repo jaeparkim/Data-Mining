@@ -8,9 +8,11 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
+
 plt.style.use('seaborn-whitegrid')
 
 
+# Linear Regression
 if __name__ == '__main__':
     filename = sys.argv[1]
     alpha = float(sys.argv[2])
@@ -70,13 +72,22 @@ if __name__ == '__main__':
     Dw = validation.dot(w.T)
     SSE = np.square(validation_y - Dw)
     SSE = np.sum(SSE)
-    print("SSE on validation set:", "{: .3f}".format(SSE))
+    print("\nSSE on validation set:", "{: .3f}".format(SSE))
 
     # Square Sum Error on test set
     Dw = testing.dot(w.T)
-    SSE = np.square(testing - Dw)
+    SSE = np.square(testing_y - Dw)
     SSE = np.sum(SSE)
     print("SSE on test set:", "{: .3f}".format(SSE))
+
+    # Total Sum of Squares
+    mu = np.mean(testing_y)
+    testing_y = np.square(testing_y - mu)
+    TSS = np.sum(testing_y)
+    print("TSS on test set:", "{: .3f}".format(TSS))
+
+    R_squared = (TSS - SSE) / SSE
+    print("R\N{SUPERSCRIPT TWO} on test set:", "{: .4f}".format(R_squared))
 
 
     sys.exit()
